@@ -85,13 +85,13 @@ def stock_predict():
         st.write('信頼度：低')
     st.write('水色の線(Predict)が予測値です。')
 
-    predict_data = model.predict(predict_data)
+    predicted_data = model.predict(predict_data)
     df_stock['Predict'] = np.nan
     last_date = df_stock.iloc[-1].name
     one_day = 86400
     next_unix = last_date.timestamp() + one_day
 
-    for data in predict_data:
+    for data in predicted_data:
         next_date = datetime.datetime.fromtimestamp(next_unix)
         next_unix += one_day
         df_stock.loc[next_date] = np.append([np.nan]* (len(df_stock.columns)-1),data)
